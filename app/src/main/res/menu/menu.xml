@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/agree"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menuAgree" />
+    <item
+        android:id="@+id/badThread"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menBadThread" />
+    <item
+        android:id="@+id/badThread2"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/menBadThread" />
+</menu>

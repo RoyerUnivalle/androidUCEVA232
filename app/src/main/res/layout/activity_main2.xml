@@ -18,7 +18,6 @@
         android:id="@+id/tv2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:password="true"
         android:hint="Pick your password" />
 
     <Button
@@ -37,4 +36,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="LogIn delegate" />
+    <Button
+        android:id="@+id/btnPintar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="consultarVolley"
+        android:text="Colorear" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.ucevaapp20232.BlankFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/contenedorFragmentos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+
 </LinearLayout>

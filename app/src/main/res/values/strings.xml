@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">UcevaApp20232</string>
+    <string name="menuAgree">Agree</string>
+    <string name="menBadThread">Bad Thread</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

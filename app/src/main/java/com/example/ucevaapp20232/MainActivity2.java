@@ -38,6 +38,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
@@ -124,6 +126,35 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
        GetHttp newHttp = new GetHttp();
        newHttp.execute();
     }
+
+    public void callvolly(View h){
+        RequestQueue MyRequestQueue = Volley.newRequestQueue(this);
+        String url = "https://api.invessoft.app/api/login/ExternalLogin?username=royer.estrada@correounivalle.edu.co&password=r118020ee";
+        StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //This code is executed if the server responds, whether or not the response contains data.
+                //The String 'response' contains the server's response.
+                Log.d("", "Respuesta: "+response);
+                tv1.setText(response.substring(0,500));
+                tv2.setText(response);
+            }
+        }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //This code is executed if there is an error.
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> MyData = new HashMap<>();
+                MyData.put("username", "tu correo de invesoft");
+                MyData.put("password", "tu clave de invessoft");
+                return MyData;
+            }
+        };
+        MyRequestQueue.add(MyStringRequest);
+    }
+
 
     public  void consultarVolley(View f){
         RequestQueue queue = Volley.newRequestQueue(this);

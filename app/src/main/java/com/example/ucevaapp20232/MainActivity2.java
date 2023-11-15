@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ucevaapp20232.connection.Connection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +47,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     Button btn2, btn3, btnPintar;
     EditText tv1, tv2;
+    Connection con;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             }
         });
         btn3.setOnClickListener(this);
+        con = new Connection(this, "uceva",null,1);
+        db = con.getWritableDatabase();
+        if (con!=null){
+            Toast.makeText(this,"sql connected", Toast.LENGTH_LONG);
+        }
     }
 
     public void saludar(View d){
@@ -169,9 +178,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                             Log.d("", "Respuesta: "+response.toString());
                             JSONArray jsonArray = response.getJSONArray("eventos");
                             Log.d("", "Respuesta: "+jsonArray.toString());
-                            String eventos = "";
+                            String query = "";
                             tv1.setText(jsonArray.toString().substring(0,500));
                             tv2.setText(response.getString("count"));
+                            int cantidadEventos = Integer.parseInt(response.getString("count"));
+                            for (int i = 0; i < cantidadEventos; i++) {
+                                    JSONObject evento = jsonArray.getJSONObject(i);
+                                    query = "insert into eventos (nombre, id) values ('"+evento.getString("nombre_evento")+"',"+evento.getString("id_evento")+")";
+                                    db.execSQL(query);
+                            }
                             //cantidadRegistros=response.getInt("count");
                             //dataAgenda = response.getJSONArray("agenda"); // for foreach
                             //System.out.println("cantidadRegistros1: "+cantidadRegistros);
